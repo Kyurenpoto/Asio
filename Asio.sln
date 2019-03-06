@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AsioClient", "AsioClient\AsioClient.vcxproj", "{1C95FB70-0C71-4B34-A878-DF47EC9B6F22}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AsioServer", "AsioServer\AsioServer.vcxproj", "{637FE5F7-1E4B-4C40-8DE6-B39309C43D9A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AsioWrapLib", "AsioWrapLib\AsioWrapLib.vcxproj", "{75C015B2-C2A8-4748-BCA5-A42500CD3957}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C95FB70-0C71-4B34-A878-DF47EC9B6F22}.Debug|x64.ActiveCfg = Debug|x64
+		{1C95FB70-0C71-4B34-A878-DF47EC9B6F22}.Debug|x64.Build.0 = Debug|x64
+		{1C95FB70-0C71-4B34-A878-DF47EC9B6F22}.Debug|x86.ActiveCfg = Debug|Win32
+		{1C95FB70-0C71-4B34-A878-DF47EC9B6F22}.Debug|x86.Build.0 = Debug|Win32
+		{1C95FB70-0C71-4B34-A878-DF47EC9B6F22}.Release|x64.ActiveCfg = Release|x64
+		{1C95FB70-0C71-4B34-A878-DF47EC9B6F22}.Release|x64.Build.0 = Release|x64
+		{1C95FB70-0C71-4B34-A878-DF47EC9B6F22}.Release|x86.ActiveCfg = Release|Win32
+		{1C95FB70-0C71-4B34-A878-DF47EC9B6F22}.Release|x86.Build.0 = Release|Win32
+		{637FE5F7-1E4B-4C40-8DE6-B39309C43D9A}.Debug|x64.ActiveCfg = Debug|x64
+		{637FE5F7-1E4B-4C40-8DE6-B39309C43D9A}.Debug|x64.Build.0 = Debug|x64
+		{637FE5F7-1E4B-4C40-8DE6-B39309C43D9A}.Debug|x86.ActiveCfg = Debug|Win32
+		{637FE5F7-1E4B-4C40-8DE6-B39309C43D9A}.Debug|x86.Build.0 = Debug|Win32
+		{637FE5F7-1E4B-4C40-8DE6-B39309C43D9A}.Release|x64.ActiveCfg = Release|x64
+		{637FE5F7-1E4B-4C40-8DE6-B39309C43D9A}.Release|x64.Build.0 = Release|x64
+		{637FE5F7-1E4B-4C40-8DE6-B39309C43D9A}.Release|x86.ActiveCfg = Release|Win32
+		{637FE5F7-1E4B-4C40-8DE6-B39309C43D9A}.Release|x86.Build.0 = Release|Win32
+		{75C015B2-C2A8-4748-BCA5-A42500CD3957}.Debug|x64.ActiveCfg = Debug|x64
+		{75C015B2-C2A8-4748-BCA5-A42500CD3957}.Debug|x64.Build.0 = Debug|x64
+		{75C015B2-C2A8-4748-BCA5-A42500CD3957}.Debug|x86.ActiveCfg = Debug|Win32
+		{75C015B2-C2A8-4748-BCA5-A42500CD3957}.Debug|x86.Build.0 = Debug|Win32
+		{75C015B2-C2A8-4748-BCA5-A42500CD3957}.Release|x64.ActiveCfg = Release|x64
+		{75C015B2-C2A8-4748-BCA5-A42500CD3957}.Release|x64.Build.0 = Release|x64
+		{75C015B2-C2A8-4748-BCA5-A42500CD3957}.Release|x86.ActiveCfg = Release|Win32
+		{75C015B2-C2A8-4748-BCA5-A42500CD3957}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C14298D2-03B3-4FAB-8793-1547214A6C4C}
+	EndGlobalSection
+EndGlobal
