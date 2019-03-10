@@ -243,12 +243,30 @@ tcp::single_sync_server::~single_sync_server() = default;
 
 void tcp::single_sync_server::send(const std::string & message)
 {
-    pImpl->send(message);
+    try
+    {
+        pImpl->send(message);
+    }
+    catch (system::system_error & e)
+    {
+        throw std::runtime_error{
+            "Error occured(" + std::to_string(e.code().value()) +
+            "): " + e.what() };
+    }
 }
 
 std::string tcp::single_sync_server::recv()
 {
-    return pImpl->recv();
+    try
+    {
+        return pImpl->recv();
+    }
+    catch (system::system_error & e)
+    {
+        throw std::runtime_error{
+            "Error occured(" + std::to_string(e.code().value()) +
+            "): " + e.what() };
+    }
 }
 
 // STRUCT tcp::single_sync_client::Impl
@@ -301,15 +319,42 @@ tcp::single_sync_client::~single_sync_client() = default;
 void tcp::single_sync_client::connect(const std::string & rawIp,
                                       const unsigned short portNum)
 {
-    pImpl->connect(rawIp, portNum);
+    try
+    {
+        pImpl->connect(rawIp, portNum);
+    }
+    catch (system::system_error & e)
+    {
+        throw std::runtime_error{
+            "Error occured(" + std::to_string(e.code().value()) +
+            "): " + e.what() };
+    }
 }
 
 void tcp::single_sync_client::send(const std::string & message)
 {
-    pImpl->send(message);
+    try
+    {
+        pImpl->send(message);
+    }
+    catch (system::system_error & e)
+    {
+        throw std::runtime_error{
+            "Error occured(" + std::to_string(e.code().value()) +
+            "): " + e.what() };
+    }
 }
 
 std::string tcp::single_sync_client::recv()
 {
-    return pImpl->recv();
+    try
+    {
+        return pImpl->recv();
+    }
+    catch (system::system_error & e)
+    {
+        throw std::runtime_error{
+            "Error occured(" + std::to_string(e.code().value()) +
+            "): " + e.what() };
+    }
 }
