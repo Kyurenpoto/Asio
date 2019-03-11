@@ -2,6 +2,7 @@
 
 #include <string>
 #include <array>
+#include <optional>
 #include <stdexcept>
 
 #define _WIN32_WINNT _WIN32_WINNT_WIN10
@@ -20,8 +21,7 @@ struct udp::single_sync_server::Impl
 
     ~Impl()
     {
-        sock_.shutdown(asio::ip::udp::socket::shutdown_both);
-        ios_.stop();
+        close();
     }
 
     void send(const std::string & rawIp,
@@ -46,6 +46,13 @@ struct udp::single_sync_server::Impl
     }
 
 private:
+    void close()
+    {
+        sock_.shutdown(asio::ip::udp::socket::shutdown_both);
+        sock_.close();
+        ios_.stop();
+    }
+
     void sendRequest(const asio::ip::udp::endpoint & ep,
                      const std::string & message)
     {
@@ -115,8 +122,7 @@ struct udp::single_sync_client::Impl
 
     ~Impl()
     {
-        sock_.shutdown(asio::ip::udp::socket::shutdown_both);
-        ios_.stop();
+        close();
     }
 
     void send(const std::string & rawIp,
@@ -141,6 +147,13 @@ struct udp::single_sync_client::Impl
     }
 
 private:
+    void close()
+    {
+        sock_.shutdown(asio::ip::udp::socket::shutdown_both);
+        sock_.close();
+        ios_.stop();
+    }
+
     void sendRequest(const asio::ip::udp::endpoint & ep,
                      const std::string & message)
     {
@@ -209,9 +222,7 @@ struct tcp::single_sync_server::Impl
 
     ~Impl()
     {
-        sock_.shutdown(asio::ip::udp::socket::shutdown_both);
-        acc_.close();
-        ios_.stop();
+        close();
     }
 
     void send(const std::string & message)
@@ -221,12 +232,42 @@ struct tcp::single_sync_server::Impl
 
     std::string recv()
     {
-        size_t bytes{ sock_.receive(asio::buffer(buf_)) };
+        system::error_code ec;
+        std::optional<std::string> message;
+
+        while (true)
+        {
+            message = receiveResponse(ec);
+
+            if (ec.value() == 0)
+                break;
+
+            if (ec.value() == asio::error::eof)
+                sock_ = acc_.accept();
+        }
+
+        return message.value();
+    }
+
+private:
+    void close()
+    {
+        sock_.shutdown(asio::ip::udp::socket::shutdown_both);
+        sock_.close();
+        acc_.close();
+        ios_.stop();
+    }
+
+    std::optional<std::string> receiveResponse(system::error_code & ec)
+    {
+        size_t bytes{ sock_.receive(asio::buffer(buf_), 0, ec) };
+        
+        if (ec.value() != 0)
+            return std::nullopt;
 
         return std::string{ buf_.data(), bytes };
     }
 
-private:
     asio::io_service ios_;
     asio::ip::tcp::acceptor acc_;
     asio::ip::tcp::socket sock_;
@@ -279,8 +320,7 @@ struct tcp::single_sync_client::Impl
 
     ~Impl()
     {
-        sock_.shutdown(asio::ip::udp::socket::shutdown_both);
-        ios_.stop();
+        close();
     }
 
     void connect(const std::string & rawIp,
@@ -303,6 +343,13 @@ struct tcp::single_sync_client::Impl
     }
 
 private:
+    void close()
+    {
+        sock_.shutdown(asio::ip::udp::socket::shutdown_both);
+        sock_.close();
+        ios_.stop();
+    }
+
     asio::io_service ios_;
     asio::ip::tcp::socket sock_;
     std::array<char, 1024> buf_;
